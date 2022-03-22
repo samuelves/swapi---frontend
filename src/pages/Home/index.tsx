@@ -5,6 +5,7 @@ import CardWithInformation from '@/components/CardWithInformation'
 import api from '@/services/api'
 import { Box } from '@mui/system'
 import { useLoading } from '@/hooks/useLoading'
+import { useAuth } from '@/hooks/useAuth'
 interface SwapiPerson {
   name: string
   height: string
@@ -28,6 +29,7 @@ type IPerson = {
 export default function Home() {
   const { setLoading } = useLoading()
   const [page, setPage] = useState(1)
+  const { token } = useAuth()
   const [person, setPerson] = useState<IPerson>({
     total: 0,
     status: 0,
@@ -39,11 +41,18 @@ export default function Home() {
   })
   const fetchPerson = async (pageNumber = 1) => {
     setLoading(true)
-    const response = await api.get<IPerson>(`/swapi/person?page=${pageNumber}`)
-    const { page } = response.data
-    setPage(page)
-    setPerson(response.data)
-    setLoading(false)
+    api
+      .get<IPerson>(`/swapi/person?page=${pageNumber}`)
+      .then(response => {
+        const { page } = response.data
+        setPage(page)
+        setPerson(response.data)
+        setLoading(false)
+      })
+      .catch(err => {
+        alert('Não foi possível carregar os dados')
+        setLoading(false)
+      })
   }
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
@@ -51,7 +60,7 @@ export default function Home() {
   }
   useEffect(() => {
     fetchPerson()
-  }, [])
+  }, [token])
   return (
     <Container maxWidth='md'>
       <Grid container spacing={4}>

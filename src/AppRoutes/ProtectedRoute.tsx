@@ -9,7 +9,9 @@ const ProtectedRoute: FC<TProtectedRouteProps> = ({ children }) => {
   const token = localStorage.getItem('token')
   const location = useLocation()
   if (!token) {
-    return <Navigate to='/login' replace state={{ from: location }} />
+    if (token === undefined || token === null) {
+      return <Navigate to='/login' replace state={{ from: location }} />
+    }
   }
 
   return children

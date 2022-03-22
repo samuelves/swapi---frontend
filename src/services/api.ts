@@ -7,7 +7,7 @@ export default axios.create({
   headers: {
     Authorization: token ? `Bearer ${token}` : '',
     accept: 'application/json',
-    'accept-language-id': '2'
+    'Content-Type': 'application/json'
   }
 })
 axios.defaults.withCredentials = true

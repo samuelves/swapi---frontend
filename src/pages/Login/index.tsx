@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Avatar, Button, TextField, Box, Typography, Container } from '@mui/material'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useAuth } from '@/hooks/useAuth'
@@ -15,6 +16,7 @@ export default function Login() {
       password: user.password
     })
   }
+
   return (
     <Container component='main' maxWidth='xs'>
       <Box

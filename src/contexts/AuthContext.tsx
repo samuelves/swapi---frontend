@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import api from '@/services/api'
@@ -57,7 +58,13 @@ const AuthProvider = ({ children }: AuthContextProps) => {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
-      setIsAuthenticated(true)
+      if (token === undefined || token === null) {
+        setToken(null)
+        setIsAuthenticated(false)
+        navigate('/')
+      } else {
+        setIsAuthenticated(true)
+      }
     }
   }, [])
 

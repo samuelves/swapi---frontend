@@ -8,9 +8,17 @@ type THandleLogin = {
   password: string
 }
 
+type THandleRegister = {
+  email: string
+  password: string
+  phone: string
+  name: string
+}
+
 type AuthContextType = {
   token: string | null
   handleLogin: (loginData: THandleLogin) => void
+  handleRegister: (RegisterData: THandleRegister) => void
   handleLogout: () => void
   isAuthenticated: boolean
 }
@@ -31,6 +39,7 @@ type TLocationState = {
 const INITIAL_STATE = {
   token: null,
   handleLogin: (loginData: THandleLogin) => {},
+  handleRegister: (RegisterData: THandleRegister) => {},
   handleLogout: () => {},
   isAuthenticated: false
 }
@@ -57,7 +66,7 @@ const AuthProvider = ({ children }: AuthContextProps) => {
     const origin = state?.from?.pathname || '/'
     const { email, password } = loginData
     api
-      .post('/session', {
+      .post('/login', {
         email,
         password
       })
@@ -84,6 +93,21 @@ const AuthProvider = ({ children }: AuthContextProps) => {
         setLoading(false)
       })
   }
+
+  const handleRegister = async (RegisterData: THandleRegister) => {
+    setLoading(true)
+    api
+      .post('/register', RegisterData)
+      .then(() => {
+        setLoading(false)
+        navigate('/')
+      })
+      .catch(() => {
+        alert('Register failed')
+        setLoading(false)
+      })
+  }
+
   const handleLogout = () => {
     setToken(null)
   }
@@ -92,7 +116,8 @@ const AuthProvider = ({ children }: AuthContextProps) => {
     token,
     isAuthenticated,
     handleLogin,
-    handleLogout
+    handleLogout,
+    handleRegister
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

@@ -1,26 +1,48 @@
 import * as React from 'react'
 import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
-export default function CardWithInformation() {
+interface SwapiPerson {
+  name: string
+  height: string
+  mass: string
+  hair_color: string
+  skin_color: string
+  eye_color: string
+  birth_year: string
+  gender: string
+}
+
+export default function CardWithInformation({ person }: { person: SwapiPerson }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, minWidth: 275 }}>
       <CardContent>
         <Typography gutterBottom variant='h5' component='div'>
-          Lizard
+          {person.name}
         </Typography>
-        <Typography variant='body2' color='text.secondary'>
-          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents
-          except Antarctica
+        <Typography variant='caption' color='text.secondary' component='div'>
+          height: {person.height}
+        </Typography>
+        <Typography variant='caption' color='text.secondary' component='div'>
+          mass: {person.mass}
+        </Typography>
+        <Typography variant='caption' color='text.secondary' component='div'>
+          hair color: {person.hair_color}
+        </Typography>
+        <Typography variant='caption' color='text.secondary' component='div'>
+          skin color: {person.skin_color}
+        </Typography>
+        <Typography variant='caption' color='text.secondary' component='div'>
+          eye color: {person.eye_color}
+        </Typography>
+        <Typography variant='caption' color='text.secondary' component='div'>
+          birth year: {person.birth_year}
+        </Typography>
+        <Typography variant='caption' color='text.secondary' component='div'>
+          gender: {person.gender}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size='small'>Share</Button>
-        <Button size='small'>Learn More</Button>
-      </CardActions>
     </Card>
   )
 }

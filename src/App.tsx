@@ -17,11 +17,11 @@ const App: FC = () => {
 
 const Root = styled('div')`
   width: 100%;
-  min-height: 70vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  margin-top: 70px;
   & a {
     text-decoration: none;
     color: ${({ theme: { palette } }) => palette.primary.main};

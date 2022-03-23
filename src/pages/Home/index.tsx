@@ -50,7 +50,7 @@ export default function Home() {
         setLoading(false)
       })
       .catch(err => {
-        window.reload()
+        window.location.reload()
         setLoading(false)
       })
   }

@@ -65,6 +65,18 @@ export default function Login() {
           <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }} size='large'>
             Sign In
           </Button>
+          <Button
+            type='button'
+            onClick={() => {
+              window.location.href = '/register'
+            }}
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2 }}
+            size='large'
+          >
+            Register
+          </Button>
         </Box>
       </Box>
     </Container>

@@ -50,7 +50,7 @@ export default function Home() {
         setLoading(false)
       })
       .catch(err => {
-        alert('Não foi possível carregar os dados')
+        window.reload()
         setLoading(false)
       })
   }
